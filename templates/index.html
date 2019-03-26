@@ -4,26 +4,24 @@
     <meta charset="utf-8">
     <title>Hello VR Furniture!</title>
     <meta name="description" content="Hello VR Furniture">
-    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
-    <a-scene>
-      <a-assets>
-        <!-- API docs: https://bit.ly/wayfair3dapi -->
-        <a-asset-item id="model" src="https://secure.img1.wfcdn.com/docresources/40128/108/1088857.glb"></a-asset-item>
-      </a-assets>
-
-      <a-gltf-model position="0 0 0" rotation="0 30 0" src="#model"></a-gltf-model>
-      <a-sky color="#ECECEC"></a-sky>
-      <a-plane position="0 0 0" rotation="-90 45 0" width="4" height="4" color="#7BC8A4"></a-plane>
-
-      <!-- environment lighting -->
-      <a-entity light="color: #FFF; intensity: 1.5" position="0 1 1"></a-entity>
-
-      <!-- camera position -->
-      <a-entity position="0 1.5 2.7" camera look-controls>
-        <a-camera></a-camera>
-      </a-entity>
-    </a-scene>
+    <div class="container">
+        <span>{{products|length}} products found</span>
+        {% for product in products %}
+        <div class="media">
+            <img class="mr-3" src="{{ product.thumbnail_image_url}}" alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0">{{product.product_name }}</h5>
+                {{product.product_description }}
+                <a href="/product/{{ product.sku }}" class="btn btn-primary">View Sku Model</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
 </html>
