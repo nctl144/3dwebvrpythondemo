@@ -21,12 +21,14 @@ def extract_info(response_content, product_info):
         product_sku = product['sku']
         product_thumbnail = product['thumbnail_image_url']
         product_name = product['product_name']
+        product_url = product['product_page_url']
 
         # for key, val in product.items():
         #     print(key, val)
 
         product_info[product_sku].append(product_thumbnail)
         product_info[product_sku].append(product_name)
+        product_info[product_sku].append(product_url)
 
 
 def main():
@@ -51,12 +53,14 @@ def main():
     for key, val in info_dict.items():
         product_thumbnail = val[0]
         product_name = val[1]
+        product_url = val[2]
 
         return_image = requests.get(product_thumbnail)
 
         # print the good content to the terminal
         runner(BytesIO(return_image.content))
         print(pyfiglet.figlet_format('I am a ' + product_name + ' buy me hehe xD'))
+        print(product_url)
 
         sleep(2)
 
