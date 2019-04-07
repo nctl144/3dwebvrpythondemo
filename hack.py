@@ -1,7 +1,6 @@
 import requests
 import json
 import collections
-import requests
 import pyfiglet
 from PIL import Image
 from io import BytesIO
