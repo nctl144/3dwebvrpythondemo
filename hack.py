@@ -1,6 +1,9 @@
 import requests
 import json
 import collections
+from PIL import Image
+import requests
+from io import BytesIO
 
 from hack_test import runner
 
@@ -38,7 +41,9 @@ def main():
     for key, val in info_dict.items():
         product_thumbnail = val[0]
 
-        runner(product_thumbnail)
+        return_image = requests.get(product_thumbnail)
+
+        runner(BytesIO(return_image.content))
 
 
 

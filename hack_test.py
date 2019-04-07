@@ -73,9 +73,9 @@ def runner(path):
     # Note: This text file will be created by default under
     #       the same directory as this python file,
     #       NOT in the directory from where the image is pulled.
-    f = open('img.txt','w')
-    f.write(image)
-    f.close()
+    # f = open('img.txt','w')
+    # f.write(image)
+    # f.close()
 
 '''
 method main():
