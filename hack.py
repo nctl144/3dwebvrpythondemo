@@ -8,13 +8,12 @@ from io import BytesIO
 from hack_test import runner
 
 
-def extract_info(request_content):
+def extract_info(response_content, product_info):
     """
     This function extract the info from the request content
     """
-
-    json_data = json.loads(request_content)
-    product_info = collections.defaultdict(list)
+    json_data = json.loads(response_content)
+    # product_info = collections.defaultdict(list)
 
     for product in json_data:
         product_sku = product['sku']
@@ -25,7 +24,6 @@ def extract_info(request_content):
 
         product_info[product_sku].append(product_thumbnail)
 
-    return product_info
 
 def main():
     headers = {
@@ -33,16 +31,27 @@ def main():
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36',
     }
 
-    response = requests.get('https://www.wayfair.com/3dapi/models', headers=headers,\
-        auth=('nctl144@gmail.com', '5ca9202c12dcc'))
+    page_counter = 1
+    info_dict = collections.defaultdict(list)
 
-    info_dict = extract_info(response.text)
+    while True:
+        response = requests.get('https://www.wayfair.com/3dapi/models?page={}'.format(page_counter), headers=headers,\
+            auth=('nctl144@gmail.com', '5ca9202c12dcc'))
+
+        if not response.text or response.text == '"No product(s) found."':
+            break
+
+        extract_info(response.text, info_dict)
+        page_counter += 1
+
+
 
     for key, val in info_dict.items():
         product_thumbnail = val[0]
 
         return_image = requests.get(product_thumbnail)
 
+        # print the good content to the terminal
         runner(BytesIO(return_image.content))
 
 
