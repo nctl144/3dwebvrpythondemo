@@ -1,15 +1,15 @@
 # Wayfair 3D Model API Demo
 
-This repository containers a simple python demo of 3d Model API request and AFrame JS Browser view of the Model.
+This repository is forked from [3dwebvrpythondemo](https://github.com/draco2003/3dwebvrpythondemo)
 
-To run demo from Gitpod(Requires github and gitpod account) :
+A simple hack for hackdartmouth 2019 xD
 
-http://gitpod.io/#https://github.com/draco2003/techtogether3ddemo
+run
 
+`
+pip install -r requirements.txt
+`
 
-From the gitpod terminal run the command: `python server.py`
-
-To run on your own environment:
-
-Install dependencies: `pip install -r requirements.txt`
-Run server `python server.py`
+`
+python hack.py
+`
