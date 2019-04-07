@@ -1,9 +1,11 @@
 import requests
 import json
 import collections
-from PIL import Image
 import requests
+import pyfiglet
+from PIL import Image
 from io import BytesIO
+from time import sleep
 
 from hack_test import runner
 
@@ -18,11 +20,13 @@ def extract_info(response_content, product_info):
     for product in json_data:
         product_sku = product['sku']
         product_thumbnail = product['thumbnail_image_url']
+        product_name = product['product_name']
 
         # for key, val in product.items():
         #     print(key, val)
 
         product_info[product_sku].append(product_thumbnail)
+        product_info[product_sku].append(product_name)
 
 
 def main():
@@ -44,17 +48,17 @@ def main():
         extract_info(response.text, info_dict)
         page_counter += 1
 
-
-
     for key, val in info_dict.items():
         product_thumbnail = val[0]
+        product_name = val[1]
 
         return_image = requests.get(product_thumbnail)
 
         # print the good content to the terminal
         runner(BytesIO(return_image.content))
+        print(pyfiglet.figlet_format('I am a ' + product_name + ' buy me hehe xD'))
 
-
+        sleep(2)
 
 
 if __name__ == "__main__":
